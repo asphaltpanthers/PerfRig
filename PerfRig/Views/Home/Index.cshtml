@@ -14,7 +14,7 @@
                 //On success, 'data' contains a list of load tests.
                 $.each(data, function (key, item) {
                     //Add a list item for the load test.
-                    $('<li>', { text: item }).appendTo($('#loadtests'));
+                    $('#loadtests').append("<li><a href='" + window.location.origin + "/Home/LoadTest/" + item + "'>" + item + "</a></li>");
                 });
             });
     });

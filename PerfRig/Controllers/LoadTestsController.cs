@@ -13,10 +13,15 @@ namespace PerfRig.Controllers
     {
         public IEnumerable<String> GetAllTests()
         {
-            return QueryLoadTests("SELECT DISTINCT TestCaseName FROM [LoadTest2010].[dbo].[LoadTestCase]");
+            return GetTestsFromStorage("SELECT DISTINCT LoadTestName FROM [LoadTest2010].[dbo].[LoadTestRun]");
         }
 
-        private IEnumerable<String> QueryLoadTests(string queryString)
+        public IEnumerable<String> GetTest(string id)
+        {
+            return GetTestsFromStorage("SELECT DISTINCT TestCaseName FROM [LoadTest2010].[dbo].[LoadTestCase] WHERE LoadTestRunId in (SELECT LoadTestRunId FROM [LoadTest2010].[dbo].[LoadTestRun] WHERE LoadTestName = '" + id + "')");
+        }
+
+        private IEnumerable<String> GetTestsFromStorage(String queryString)
         {
             using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["SQLConnectionString"].ToString()))
             {

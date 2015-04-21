@@ -14,5 +14,12 @@ namespace PerfRig.Controllers
 
             return View();
         }
+
+        public ActionResult LoadTest()
+        {
+            ViewBag.Title = "LoadTest";
+
+            return View();
+        }
     }
 }
