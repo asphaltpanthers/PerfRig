@@ -1,6 +1,6 @@
 ﻿<script>
     var loadTestName = window.location.pathname.split('/')[3]
-    document.write("<h1>" + loadTestName + "</h1>");
+    document.write("<h1>" + decodeURIComponent(loadTestName) + "</h1>");
 </script>
 <br />
 <h2>Web Tests:</h2>
@@ -17,7 +17,7 @@
                     //On success, 'data' contains a list of load tests.
                     $.each(data, function (key, item) {
                         //Add a list item for the load test.
-                        $('#webtests').append("<li><a href='" + window.location.origin + "/Home/LoadTest/" + item + "'>" + item + "</a></li>");
+                        $('#webtests').append("<li><a href='" + window.location.origin + "/Home/WebTest/" + loadTestName + "/" + item + "'>" + item + "</a></li>");
                     });
                 });
         });

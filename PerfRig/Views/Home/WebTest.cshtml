@@ -1,0 +1,49 @@
+﻿<script>
+    var loadTestName = window.location.pathname.split('/')[3]
+    var webTestName = window.location.pathname.split('/')[4]
+    document.write("<h1>" + decodeURIComponent(webTestName) + "</h1>");
+</script>
+<br />
+<h2>Test Run Time</h2>
+<div id="visualization"></div>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script>
+    var container = document.getElementById('visualization');
+
+    var uri = window.location.origin + '/api/loadtests/getwebtesttimes/' + loadTestName + '/' + webTestName;
+
+    $(document).ready(function () {
+        $.getJSON(uri)
+            .done(function (data) {
+                var items = [];
+                $.each(data, function (key, item) {
+                    items.push({ id: item.Id, x: item.TimeStamp, y: item.ElapsedTime });
+                })
+
+                var dataset = new vis.DataSet(items);
+
+                function compare(a, b) {
+                    if (a.TimeStamp < b.TimeStamp)
+                        return -1;
+                    if (a.TimeStamp > b.TimeStamp)
+                        return 1;
+                    return 0;
+                }
+
+                items.sort(compare);
+                var options = {
+                    style: 'bar',
+                    barChart: { width: 50, align: 'center', handleOverlap: 'sideBySide' }, // align: left, center, right
+                    drawPoints: false,
+                    dataAxis: {
+                        icons: true
+                    },
+                    orientation: 'top',
+                    start: items[0].TimeStamp,
+                    end: items[items.length - 1].TimeStamp
+                };
+
+                var graph2d = new vis.Graph2d(container, items, options);
+            })
+    })
+</script>

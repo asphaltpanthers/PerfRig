@@ -21,5 +21,12 @@ namespace PerfRig.Controllers
 
             return View();
         }
+
+        public ActionResult WebTest()
+        {
+            ViewBag.Title = "WebTest";
+
+            return View();
+        }
     }
 }

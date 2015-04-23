@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Http;
 using System.Web.Mvc;
 using System.Web.Routing;
 
@@ -15,8 +16,14 @@ namespace PerfRig
 
             routes.MapRoute(
                 name: "Default",
-                url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                url: "{controller}/{action}/{id}/{webId}",
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, webId = UrlParameter.Optional }
+            );
+
+            routes.MapHttpRoute(
+                name: "LoadTestTimes",
+                routeTemplate: "api/{controller}/{action}/{id}/{webId}",
+                defaults: new { id = UrlParameter.Optional, webId = UrlParameter.Optional }
             );
         }
     }
