@@ -19,12 +19,6 @@ namespace PerfRig
                 url: "{controller}/{action}/{id}/{webId}",
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional, webId = UrlParameter.Optional }
             );
-
-            routes.MapHttpRoute(
-                name: "LoadTestTimes",
-                routeTemplate: "api/{controller}/{action}/{id}/{webId}",
-                defaults: new { id = UrlParameter.Optional, webId = UrlParameter.Optional }
-            );
         }
     }
 }

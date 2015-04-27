@@ -25,7 +25,6 @@ namespace PerfRig.Controllers
                 ")");
         }
 
-        [HttpGet]
         public IEnumerable<TimeByDate> GetWebTestTimes(string id, string webId)
         {
             return GetTimesFromStorage("SELECT TimeStamp, ElapsedTime FROM [LoadTest2010].[dbo].[LoadTestTestDetail]" +
