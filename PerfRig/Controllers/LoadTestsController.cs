@@ -19,13 +19,24 @@ namespace PerfRig.Controllers
 
         public IEnumerable<String> GetWebTests(string id)
         {
-            return GetTestsFromStorage("SELECT DISTINCT TestCaseName FROM [LoadTest2010].[dbo].[LoadTestCase] WHERE LoadTestRunId in (SELECT LoadTestRunId FROM [LoadTest2010].[dbo].[LoadTestRun] WHERE LoadTestName = '" + id + "')");
+            return GetTestsFromStorage("SELECT DISTINCT TestCaseName FROM [LoadTest2010].[dbo].[LoadTestCase]" +
+                "WHERE LoadTestRunId in (SELECT LoadTestRunId FROM [LoadTest2010].[dbo].[LoadTestRun]" +
+                    "WHERE LoadTestName = '" + id + "'" +
+                ")");
         }
 
         [HttpGet]
         public IEnumerable<TimeByDate> GetWebTestTimes(string id, string webId)
         {
-            return GetTimesFromStorage("SELECT TOP 30 TimeStamp, ElapsedTime FROM [LoadTest2010].[dbo].[LoadTestTestDetail] WHERE LoadTestRunId in (SELECT LoadTestRunId FROM [LoadTest2010].[dbo].[LoadTestCase] WHERE LoadTestRunId in (SELECT LoadTestRunId FROM [LoadTest2010].[dbo].[LoadTestRun] WHERE LoadTestName = '" + id + "') and TestCaseName = '" + webId + "')");
+            return GetTimesFromStorage("SELECT TimeStamp, ElapsedTime FROM [LoadTest2010].[dbo].[LoadTestTestDetail]" +
+                "WHERE EXISTS (SELECT * FROM [LoadTest2010].[dbo].[LoadTestRun] JOIN [LoadTest2010].[dbo].[LoadTestCase] ON" +
+                    "([LoadTest2010].[dbo].[LoadTestRun].LoadTestRunId = [LoadTest2010].[dbo].[LoadTestCase].LoadTestRunId)" +
+                    "WHERE" +
+                        "[LoadTest2010].[dbo].[LoadTestTestDetail].LoadTestRunId = [LoadTest2010].[dbo].[LoadTestRun].LoadTestRunId AND" +
+                        "[LoadTest2010].[dbo].[LoadTestTestDetail].TestCaseId = [LoadTest2010].[dbo].[LoadTestCase].TestCaseId AND" +
+                        "[LoadTest2010].[dbo].[LoadTestRun].LoadTestName = '" + id + "' AND" +
+                        "[LoadTest2010].[dbo].[LoadTestCase].TestCaseName = '" + webId + "'" +
+                ")");
         }
 
         private IEnumerable<String> GetTestsFromStorage(String queryString)
