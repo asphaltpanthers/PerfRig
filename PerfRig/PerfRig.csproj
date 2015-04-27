@@ -204,7 +204,6 @@
     </Compile>
     <Compile Include="Models\TimesByDate.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
