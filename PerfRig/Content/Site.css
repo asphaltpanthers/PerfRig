@@ -17,7 +17,7 @@ textarea {
 }
 
 #nav {
-    width: 20%;
+    min-width: 20%;
     float: left;
 }
 
