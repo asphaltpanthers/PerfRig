@@ -10,7 +10,7 @@
 <script>
     var container = document.getElementById('visualization');
 
-    var uri = window.location.origin + '/api/loadtests/' + loadTestName + '/' + webTestName;
+    var uri = window.location.origin + '/api/loadtests/GetWebTestTimes/' + loadTestName + '/' + webTestName;
 
     $(document).ready(function () {
         $.getJSON(uri)

@@ -21,6 +21,12 @@ namespace PerfRig
             config.MapHttpAttributeRoutes();
 
             config.Routes.MapHttpRoute(
+                name: "DefaultApiWithAction",
+                routeTemplate: "api/{controller}/{action}/{id}/{webId}",
+                defaults: new { id = RouteParameter.Optional, webId = RouteParameter.Optional }
+            );
+
+            config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}/{webId}",
                 defaults: new { id = RouteParameter.Optional, webId = RouteParameter.Optional }

@@ -17,6 +17,7 @@ namespace PerfRig.Controllers
             return GetTestsFromStorage("SELECT DISTINCT LoadTestName FROM [LoadTest2010].[dbo].[LoadTestRun]");
         }
 
+        [ActionName("GetWebTests")]
         public IEnumerable<String> GetWebTests(string id)
         {
             return GetTestsFromStorage("SELECT DISTINCT TestCaseName FROM [LoadTest2010].[dbo].[LoadTestCase]" +
@@ -25,6 +26,7 @@ namespace PerfRig.Controllers
                 ")");
         }
 
+        [ActionName("GetWebTestTimes")]
         public IEnumerable<TimeByDate> GetWebTestTimes(string id, string webId)
         {
             return GetTimesFromStorage("SELECT TimeStamp, ElapsedTime FROM [LoadTest2010].[dbo].[LoadTestTestDetail]" +
@@ -36,6 +38,13 @@ namespace PerfRig.Controllers
                         "[LoadTest2010].[dbo].[LoadTestRun].LoadTestName = '" + id + "' AND" +
                         "[LoadTest2010].[dbo].[LoadTestCase].TestCaseName = '" + webId + "'" +
                 ")");
+        }
+
+        [ActionName("GetLoadTestTimes")]
+        public IEnumerable<TimeByDate> GetLoadTestTimes(string id)
+        {
+            return GetTimesFromStorage("SELECT EndTime, RunDuration FROM [LoadTest2010].[dbo].[LoadTestRun]" +
+                "WHERE LoadTestName = '" + id + "'");
         }
 
         private IEnumerable<String> GetTestsFromStorage(String queryString)
