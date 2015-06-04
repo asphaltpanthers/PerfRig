@@ -1,5 +1,5 @@
-﻿function displayGraph(timeUri) {
-    var container = document.getElementById('visualization');
+﻿function displayGraph(timeUri, divId) {
+    var container = document.getElementById(divId);
 
     $(document).ready(function () {
         $.getJSON(timeUri)

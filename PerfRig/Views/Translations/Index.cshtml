@@ -1,0 +1,29 @@
+﻿<h1>Translations</h1>
+<br />
+<h2>Just Joins</h2>
+<div id="justJoinsVisualization"></div>
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-2.0.3.min.js"></script>
+<script src="~/Scripts/displaygraph.js"></script>
+<script>
+    displayGraph(window.location.origin + '/api/dashboard/GetTranslationTimes/DFE0F9E2-11CC-4C0E-A451-2D06F8B1D4E6', 'justJoinsVisualization');
+</script>
+<h2>One Aggregation</h2>
+<div id="oneAggregationVisualization"></div>
+<script>
+    displayGraph(window.location.origin + '/api/dashboard/GetTranslationTimes/0EBF95E8-5D21-41CF-BFA3-D6E9AD2E9E5A', 'oneAggregationVisualization');
+</script>
+<h2>Two Aggregations</h2>
+<div id="twoAggregationsVisualization"></div>
+<script>
+    displayGraph(window.location.origin + '/api/dashboard/GetTranslationTimes/54274342-F023-42A9-B048-7F14AA636819', 'twoAggregationsVisualization');
+</script>
+<h2>One Calculation</h2>
+<div id="oneCalculationVisualization"></div>
+<script>
+    displayGraph(window.location.origin + '/api/dashboard/GetTranslationTimes/603C857E-F4D1-4D7D-A9B0-CF6FC16ADB52', 'oneCalculationVisualization');
+</script>
+<h2>Two Calculations</h2>
+<div id="twoCalculationsVisualization"></div>
+<script>
+    displayGraph(window.location.origin + '/api/dashboard/GetTranslationTimes/751AE3C9-944A-4449-A77A-D53102E1D0FF', 'twoCalculationsVisualization');
+</script>
