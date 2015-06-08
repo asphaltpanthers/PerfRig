@@ -17,18 +17,14 @@ namespace PerfRig.Controllers
         public IEnumerable<TimeByDate> GetTranslationTimes(string id)
         {
             TranslationStatus[] statuses = GetStatuses(new Uri(ConfigurationManager.AppSettings["DashboardHost"].ToString() + "api/projectionstatus/" + id));
-            return statuses.Select(s => {
-                if (s.End != null)
-                {
-                    return new TimeByDate
+            return statuses.Where(s => s.End != null && !s.ProjectionStatusType.Equals("Error")).Select(s =>
+            {
+                return new TimeByDate
                     {
                         Id = Guid.NewGuid(),
                         TimeStamp = DateTime.Parse(s.Start.ToString()).ToString(),
                         ElapsedTime = s.End.Value.Subtract(s.Start).TotalSeconds
                     };
-                }
-
-                return null;
             }).Where(s => s != null);
         }
 
@@ -42,7 +38,8 @@ namespace PerfRig.Controllers
         }
     }
 
-    public class TranslationStatus{
+    public class TranslationStatus
+    {
         public DateTime? End;
         public String FileName;
         public String Id;
